@@ -1,0 +1,16 @@
+PODS:
+  - XHPermanentThread (0.1.0)
+
+DEPENDENCIES:
+  - XHPermanentThread (from `../`)
+
+EXTERNAL SOURCES:
+  XHPermanentThread:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  XHPermanentThread: be7ff99e598da30b615ee6ee58de168b2e4a7286
+
+PODFILE CHECKSUM: c18b43c3871a89db01c850f4d463ae31999cb254
+
+COCOAPODS: 1.5.3

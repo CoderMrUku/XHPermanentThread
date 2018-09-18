@@ -10,7 +10,6 @@
 
 @interface XHPermanentThread : NSObject
 
-- (void)start;
 - (void)excuteBlock:(void(^)(void))tasks;
 - (void)stop;
 

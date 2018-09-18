@@ -24,21 +24,20 @@
     self = [super init];
     if (self) {
         __weak typeof(self) weakSelf = self;
-        _thread = [[NSThread alloc] initWithBlock:^{
-            [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:NSDefaultRunLoopMode];
-            while (weakSelf && !weakSelf.stopped) {
-                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-            }
-        }];
+        if (@available(iOS 10.0, *)) {
+            _thread = [[NSThread alloc] initWithBlock:^{
+                [weakSelf _keepThreadAlive];
+            }];
+        } else {
+            _thread = [[NSThread alloc] initWithTarget:self selector:@selector(_threadInitialization) object:nil];
+        }
+        // 自动开启
+        [self _start];
     }
     return self;
 }
 
 #pragma mark - Public Methods
-
-- (void)start {
-    [_thread start];
-}
 
 - (void)excuteBlock:(void (^)(void))tasks {
     if (self.thread && tasks) {
@@ -53,6 +52,21 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)_threadInitialization {
+    [self _keepThreadAlive];
+}
+
+- (void)_keepThreadAlive {
+    [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:NSDefaultRunLoopMode];
+    while (self && !self.stopped) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+}
+
+- (void)_start {
+    [_thread start];
+}
 
 - (void)_stopRunLoop {
     self.stop = YES;

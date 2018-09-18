@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'XHPermanentThread_Example' do
+  pod 'XHPermanentThread', :path => '../'
+
+  target 'XHPermanentThread_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

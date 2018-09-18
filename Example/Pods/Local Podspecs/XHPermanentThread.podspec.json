@@ -1,0 +1,21 @@
+{
+  "name": "XHPermanentThread",
+  "version": "0.1.0",
+  "summary": "线程保活",
+  "homepage": "https://github.com/CoderMrUku/XHPermanentThread",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "CoderMrUku": "houyue10@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/CoderMrUku/XHPermanentThread.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "XHPermanentThread/Classes/**/*"
+}
