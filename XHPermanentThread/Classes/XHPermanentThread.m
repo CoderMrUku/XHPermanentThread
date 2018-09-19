@@ -31,26 +31,31 @@
         } else {
             _thread = [[NSThread alloc] initWithTarget:self selector:@selector(_threadInitialization) object:nil];
         }
-        // 自动开启
-        [self _start];
     }
     return self;
 }
 
 #pragma mark - Public Methods
-
-- (void)excuteBlock:(void (^)(void))tasks {
-    if (self.thread && tasks) {
-        [self performSelector:@selector(_task:) onThread:_thread withObject:tasks waitUntilDone:NO];
-    }
+    
+- (void)start {
+    [_thread start];
 }
-
+    
 - (void)stop {
     if (self.thread) {
         [self performSelector:@selector(_stopRunLoop) onThread:_thread withObject:nil waitUntilDone:YES];
     }
 }
 
+- (void)doTask:(void(^)(void))taskBlock {
+    if (self.thread && taskBlock) {
+        [self performSelector:@selector(_task:)
+                     onThread:_thread
+                   withObject:taskBlock
+                waitUntilDone:NO];
+    }
+}
+    
 #pragma mark - Private Methods
 
 - (void)_threadInitialization {
@@ -62,10 +67,6 @@
     while (self && !self.stopped) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
-}
-
-- (void)_start {
-    [_thread start];
 }
 
 - (void)_stopRunLoop {

@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XHPermanentThread'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = '线程保活'
   s.homepage         = 'https://github.com/CoderMrUku/XHPermanentThread'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

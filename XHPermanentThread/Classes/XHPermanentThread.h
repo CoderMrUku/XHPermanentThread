@@ -9,8 +9,21 @@
 #import <Foundation/Foundation.h>
 
 @interface XHPermanentThread : NSObject
+    
+/**
+ 开启线程
+ */
+- (void)start;
 
-- (void)excuteBlock:(void(^)(void))tasks;
+/**
+ 停止线程
+ */
 - (void)stop;
 
+/**
+ 执行Block任务
+
+ @param taskBlock 任务
+ */
+- (void)doTask:(void(^)(void))taskBlock;
 @end
